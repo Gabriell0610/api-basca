@@ -42,6 +42,7 @@ server.post("/selecoes", (req, res) => {
   res.status(201).send("Seleção cadastrada com sucesso");
 });
 
+//deletar conteudo da rota selecoes pelo id
 server.delete("/selecoes/:id", (req, res) => {
   let index = searchIndexSelecao(req.params.id);
   dataSelecoes.splice(index, 1);
