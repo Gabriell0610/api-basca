@@ -6,19 +6,19 @@ const server = express();
 server.use(express.json());
 
 // mock
-const dataSelecoes = [
-  { id: 1, name: "Brasil", titulos: "5" },
-  { id: 2, name: "Itália", titulos: "4" },
-  { id: 3, name: "França", titulos: "3" },
-];
+// const dataSelecoes = [
+//   { id: 1, name: "Brasil", titulos: "5" },
+//   { id: 2, name: "Itália", titulos: "4" },
+//   { id: 3, name: "França", titulos: "3" },
+// ];
 
 function searchById(id) {
-  return dataSelecoes.filter((selecao) => selecao.id == id);
+  return dataSelecoes.filter((selecao) => selecao.id == id)
 }
 
-//Pegandoo index da seleção através do id
+//Pegando index da seleção através do id
 function searchIndexSelecao(id) {
-  return dataSelecoes.findIndex((selecao) => selecao.id == id);
+  return dataSelecoes.findIndex((selecao) => selecao.id == id)
 }
 
 //get na rota padrão
@@ -49,6 +49,7 @@ server.delete("/selecoes/:id", (req, res) => {
   res.send("item deletado");
 });
 
+//editar conteudo da rota selecoes pelo id
 server.put("/selecoes/:id", (req, res) => {
   let index = searchIndexSelecao(req.params.id);
   dataSelecoes[index].name = req.body.name;
