@@ -1,14 +1,13 @@
-import mysql from "mysql"
+import mysql from "mysql";
 
-const connection = mysql.createConnection( {
-    host: 'localhost',
-    port: "3306",
-    user: "root",
-    password: "1006",
-    database: "dbcopa",
-})
+const connection = mysql.createConnection({
+  host: "localhost",
+  port: "3306",
+  user: "root",
+  password: "1006",
+  database: "dbcopa",
+});
 
-connection.connect()
+connection.connect();
 
-
-export default connection
+export default connection;
