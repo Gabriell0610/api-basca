@@ -1,33 +1,19 @@
 import connection from "../database/connection.js";
+import SelecaoRepositories from "../repositories/SelecaoRepositories.js";
 
 class selecaoController {
-  get(req, res) {
-    const sql = "SELECT * FROM selecoes";
-
-    connection.query(sql, (error, result) => {
-      if (error) {
-        res.status(404).json({ erro: error });
-      } else {
-        res.status(200).json(result);
-      }
-    });
+  async getData(req, res) {
+    const data = await SelecaoRepositories.get()
+    res.json(data)
   }
 
-  getById(req, res) {
-    const id = req.params.id;
-    const sql = `SELECT * FROM selecoes WHERE id=${id}`;
-
-    connection.query(sql, (error, result) => {
-      const line = result[0];
-      if (error) {
-        res.status(404).json({ erro: error });
-      } else {
-        res.status(200).json(line);
-      }
-    });
+  async getByIdData(req, res) {
+    const id = req.params.id
+    const data = await SelecaoRepositories.getById(id)
+    res.json(data)
   }
 
-  post(req, res) {
+  postData(req, res) {
     const dataSelecoes = req.body;
     const sql = `INSERT INTO selecoes SET ? `;
 
@@ -40,7 +26,7 @@ class selecaoController {
     });
   }
 
-  put(req, res) {
+  putData(req, res) {
     const dataSelecoes = req.body;
     const id = req.params.id;
     const sql = `UPDATE selecoes SET ? WHERE id=${id} `;
@@ -54,7 +40,7 @@ class selecaoController {
     });
   }
 
-  delete(req, res) {
+  deleteData(req, res) {
     const id = req.params.id;
     const sql = `DELETE FROM selecoes WHERE id=${id}`;
 
