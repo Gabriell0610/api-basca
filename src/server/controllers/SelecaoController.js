@@ -1,56 +1,39 @@
-import connection from "../database/connection.js";
 import SelecaoRepositories from "../repositories/SelecaoRepositories.js";
 
 class selecaoController {
+  //Criarndo dados
+  async postData(req, res) {
+    const dataSelecoes = req.body;
+    const data = await SelecaoRepositories.post(dataSelecoes);
+    res.json(data);
+  }
+
+  //Pegando dados
   async getData(req, res) {
-    const data = await SelecaoRepositories.get()
-    res.json(data)
+    const data = await SelecaoRepositories.get();
+    res.json(data);
   }
 
+  //Pegando dados por id
   async getByIdData(req, res) {
-    const id = req.params.id
-    const data = await SelecaoRepositories.getById(id)
-    res.json(data)
+    const id = req.params.id;
+    const data = await SelecaoRepositories.getById(id);
+    res.json(data);
   }
 
-  postData(req, res) {
-    const dataSelecoes = req.body;
-    const sql = `INSERT INTO selecoes SET ? `;
-
-    connection.query(sql, dataSelecoes, (error, result) => {
-      if (error) {
-        res.status(400).json({ erro: error });
-      } else {
-        res.status(201).json(result);
-      }
-    });
-  }
-
-  putData(req, res) {
+  //Editando dados
+  async putData(req, res) {
     const dataSelecoes = req.body;
     const id = req.params.id;
-    const sql = `UPDATE selecoes SET ? WHERE id=${id} `;
-
-    connection.query(sql, dataSelecoes, (error, result) => {
-      if (error) {
-        res.status(400).json({ erro: error });
-      } else {
-        res.status(201).json(result);
-      }
-    });
+    const data = await SelecaoRepositories.put(dataSelecoes, id);
+    res.json(data);
   }
 
-  deleteData(req, res) {
+  //Deletando dados
+  async deleteData(req, res) {
     const id = req.params.id;
-    const sql = `DELETE FROM selecoes WHERE id=${id}`;
-
-    connection.query(sql, (error, result) => {
-      if (error) {
-        res.status(404).json({ erro: error });
-      } else {
-        res.status(200).json(result);
-      }
-    });
+    const data = await SelecaoRepositories.delete(id);
+    res.json(data);
   }
 }
 
