@@ -5,7 +5,7 @@ Essa api foi criada para colocar em prática meu entendimento de Node e express.
 ## Tecnologias 🚀
 - Node
 - Express
-- Mysq
+- Mysql
 
 
 
